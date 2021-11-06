@@ -13,6 +13,7 @@ import data from "./data.js";
 import { useState } from "react";
 import Product from "./product.js";
 import { Link, Route, Switch } from "react-router-dom";
+import Detail from "./Detail";
 
 function App() {
   let [food, food변경] = useState(data);
@@ -28,8 +29,8 @@ function App() {
               style={{ maxHeight: "100px" }}
               navbarScroll
             >
-              <Nav.Link href="#action1">Home</Nav.Link>
-              <Nav.Link href="#action2">food</Nav.Link>
+              <Nav.Link ><Link to='/'>Home</Link></Nav.Link>
+              <Nav.Link ><Link to='/detail'>Detail</Link></Nav.Link>
               <NavDropdown title="Link" id="navbarScrollingDropdown">
                 <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action4">
@@ -61,8 +62,7 @@ function App() {
         <div className="jumbotron background">
           <h1>20% Season off </h1>
           <p>
-            This is a simple hero unit, a simple jumbotron style component for
-            calling extra attention to featured content or information{" "}
+            Upscale grocery delivery  free delivery on order + $100 (in the SF Bay area){" "}
           </p>
           <Button variant="primary">Lean more</Button>{" "}
         </div>
@@ -75,7 +75,7 @@ function App() {
         </div>
       </Route>
       <Route path="/detail">
-        <div> 디테일 페이지예요</div>
+        <Detail />
       </Route>
     </div>
   );
