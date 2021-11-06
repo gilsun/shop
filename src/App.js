@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import "./App.css";
 import {
   Button,
@@ -8,8 +9,13 @@ import {
   FormControl,
   Form,
 } from "react-bootstrap";
+import data from "./data.js";
+import { useState } from "react";
+import Product from "./product.js";
+import { Link, Route, Switch } from "react-router-dom";
 
 function App() {
+  let [food, food변경] = useState(data);
   return (
     <div className="App">
       <Navbar bg="light" expand="lg">
@@ -50,48 +56,27 @@ function App() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <div className="jumbotron background">
-        <h1>20% Season off </h1>
-        <p>
-          This is a simple hero unit, a simple jumbotron style component for
-          calling extra attention to featured content or information{" "}
-        </p>
-        <Button variant="primary">Lean more</Button>{" "}
-      </div>
 
-      <div className="container">
-        <div className="row">
-          <div className="col-md-4">
-            <img
-              src="https://cdn.shopify.com/s/files/1/0364/1976/4363/products/1_e45a2ba8-3a75-4ce6-b976-66dc5c94b97b.jpg?v=1635976726"
-              alt="angus meat"
-              width="100%"
-            />
-            <h4>[앵거스 정육점] 조개탕 2인분</h4>
-            <p>상품설명 & 가격</p>
-          </div>
-          <div className="col-md-4">
-            {" "}
-            <img
-              src="https://cdn.shopify.com/s/files/1/0364/1976/4363/products/KakaoTalk_Photo_2021-09-29-23-08-51003.jpg?v=1632982524"
-              alt="angus meat"
-              width="100%"
-            />
-            <h4>청태김 100매 300g</h4>
-            <p>상품설명 & 가격</p>
-          </div>
-          <div className="col-md-4">
-            {" "}
-            <img
-              src="https://cdn.shopify.com/s/files/1/0364/1976/4363/products/43c99f1bba1f2705198d5bf04f67ba65.jpg?v=1602796092"
-              alt="angus meat"
-              width="100%"
-            />
-            <h4>단감 10lb</h4>
-            <p>상품설명 & 가격</p>
+      <Route exact path="/">
+        <div className="jumbotron background">
+          <h1>20% Season off </h1>
+          <p>
+            This is a simple hero unit, a simple jumbotron style component for
+            calling extra attention to featured content or information{" "}
+          </p>
+          <Button variant="primary">Lean more</Button>{" "}
+        </div>
+        <div className="container">
+          <div className="row">
+            {data.map((item, i) => {
+              return <Product item={item} key={i} />;
+            })}
           </div>
         </div>
-      </div>
+      </Route>
+      <Route path="/detail">
+        <div> 디테일 페이지예요</div>
+      </Route>
     </div>
   );
 }
