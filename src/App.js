@@ -74,9 +74,10 @@ function App() {
           </div>
         </div>
       </Route>
-      <Route path="/detail">
-        <Detail />
+      <Route path="/detail/:id">
+        <Detail food={food} />
       </Route>
+
     </div>
   );
 }
