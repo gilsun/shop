@@ -14,9 +14,11 @@ import { useState } from "react";
 import Product from "./product.js";
 import { Link, Route, Switch } from "react-router-dom";
 import Detail from "./Detail";
+import axios from "axios";
 
 function App() {
   let [food, food변경] = useState(data);
+
   return (
     <div className="App">
       <Navbar bg="light" expand="lg">
@@ -29,8 +31,12 @@ function App() {
               style={{ maxHeight: "100px" }}
               navbarScroll
             >
-              <Nav.Link as={Link} to='/'>Home</Nav.Link>
-              <Nav.Link as={Link} to='/detail'>Detail</Nav.Link>
+              <Nav.Link as={Link} to="/">
+                Home
+              </Nav.Link>
+              <Nav.Link as={Link} to="/detail">
+                Detail
+              </Nav.Link>
               <NavDropdown title="Link" id="navbarScrollingDropdown">
                 <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action4">
@@ -62,7 +68,8 @@ function App() {
         <div className="jumbotron background">
           <h1>20% Season off </h1>
           <p>
-            Upscale grocery delivery  free delivery on order + $100 (in the SF Bay area){" "}
+            Upscale grocery delivery free delivery on order + $100 (in the SF
+            Bay area){" "}
           </p>
           <Button variant="primary">Lean more</Button>{" "}
         </div>
@@ -73,11 +80,26 @@ function App() {
             })}
           </div>
         </div>
+
+        <button
+          className="btn btn-primary"
+          onClick={() => {
+            axios
+              .get("https://shop-1350a-default-rtdb.firebaseio.com/shop.json")
+              .then((result) => {
+                console.log(result);
+              })
+              .catch(() => {
+                console.log("실패했어요");
+              });
+          }}
+        >
+          더보기
+        </button>
       </Route>
       <Route path="/detail/:id">
         <Detail food={food} />
       </Route>
-
     </div>
   );
 }
