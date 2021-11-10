@@ -15,9 +15,11 @@ import Product from "./product.js";
 import { Link, Route, Switch } from "react-router-dom";
 import Detail from "./Detail";
 import axios from "axios";
+import LoaidngUi from "./LoadingUi";
 
 function App() {
   let [food, food변경] = useState(data);
+  let [loading, setLoading] = useState(true);
 
   return (
     <div className="App">
@@ -75,7 +77,7 @@ function App() {
         </div>
         <div className="container">
           <div className="row">
-            {data.map((item, i) => {
+            {food.map((item, i) => {
               return <Product item={item} key={i} />;
             })}
           </div>
@@ -84,10 +86,16 @@ function App() {
         <button
           className="btn btn-primary"
           onClick={() => {
+            {
+              loading && <LoaidngUi />;
+            }
+
             axios
               .get("https://shop-1350a-default-rtdb.firebaseio.com/shop.json")
               .then((result) => {
-                console.log(result);
+                setLoading(false);
+                console.log(result.data);
+                food변경([...food, ...result.data]);
               })
               .catch(() => {
                 console.log("실패했어요");
