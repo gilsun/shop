@@ -60,24 +60,27 @@
   color: white;
 }
 
-.title{
+.title {
   font-size: 20px;
   /* font-weight: bold; */
   color: rgb(88, 81, 81);
 }
 
-.description{
+.description {
   font-size: 16px;
   color: rgb(88, 81, 81);
 }
 
-.order{
-
+.order {
   margin: 20px;
 }
 
-.loading{
+.loading {
   font-size: 60px;
+}
+
+.btn-primary {
+  margin-bottom: 30px;
 }
 @keyframes App-logo-spin {
   from {

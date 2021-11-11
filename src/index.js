@@ -4,10 +4,22 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+
+let store = createStore(() => {
+  return [
+    { id: 0, name: "단감", quan: 2 ,price: 35.99},
+    { id: 1, name: "조개탕", quan: 1 ,price: 25.15},
+    { id: 2, name: "청태김", quan: 3 ,price: 10.00}
+  ];
+});
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")

@@ -16,10 +16,12 @@ import { Link, Route, Switch } from "react-router-dom";
 import Detail from "./Detail";
 import axios from "axios";
 import LoaidngUi from "./LoadingUi";
+import Cart from "./Cart";
 
 function App() {
   let [food, food변경] = useState(data);
   let [loading, setLoading] = useState(true);
+  let [재고, 재고변경] = useState([10, 11, 12]);
 
   return (
     <div className="App">
@@ -36,8 +38,11 @@ function App() {
               <Nav.Link as={Link} to="/">
                 Home
               </Nav.Link>
-              <Nav.Link as={Link} to="/detail">
+              <Nav.Link as={Link} to="/detail/0">
                 Detail
+              </Nav.Link>
+              <Nav.Link as={Link} to="/cart">
+                Cart
               </Nav.Link>
               <NavDropdown title="Link" id="navbarScrollingDropdown">
                 <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
@@ -106,7 +111,11 @@ function App() {
         </button>
       </Route>
       <Route path="/detail/:id">
-        <Detail food={food} />
+        <Detail food={food} 재고={재고} 재고변경={재고변경} />
+      </Route>
+
+      <Route path="/cart">
+        <Cart />
       </Route>
     </div>
   );
