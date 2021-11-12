@@ -18,27 +18,51 @@ const Cart = (props) => {
         <tbody>
           {props.state.map((item, index) => {
             return (
-              <tr>
-                <td>{index}</td>
+              <tr key={index}>
+                <td>{item.id}</td>
                 <td>{item.name}</td>
                 <td>{item.quan}</td>
                 <td>${item.price}</td>
                 <td>
-                  <button className="btn btn-danger">-</button>
-                  <button className="btn btn-danger">+</button>
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => {
+                      props.dispatch({ type: "수량감소" });
+                    }}
+                  >
+                    -
+                  </button>
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => {
+                      props.dispatch({ type: "수량증가" });
+                    }}
+                  >
+                    +
+                  </button>
                 </td>
               </tr>
             );
           })}
         </tbody>
       </Table>
+
+      {props.aler열렸니 === true ? (
+        <div className="my-alert2">
+          <p>지금 구매하시면 신규할인 20%</p>
+          <button onClick={()=>{
+            props.dispatch({type:"알림닫기"})
+          }}>닫기</button>
+        </div>
+      ) : null}
     </div>
   );
 };
 
 function state를props화(state) {
   return {
-    state: state,
+    state: state.reducer,
+    aler열렸니: state.reducer2,
   };
 }
 

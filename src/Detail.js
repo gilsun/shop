@@ -4,6 +4,7 @@ import styled from "styled-components";
 import "./Detail.scss";
 import { Nav } from "react-bootstrap";
 import { CSSTransition } from "react-transition-group";
+import { connect } from "react-redux";
 
 let Box = styled.div`
   padding: 30px;
@@ -68,6 +69,11 @@ const Detail = (props) => {
             className="btn btn-danger order"
             onClick={() => {
               props.재고변경([9, 11, 12]);
+              props.dispatch({
+                type: "상품추가",
+                payload: { id: 2, name: "낫또 ", quan: 4 },
+              });
+              history.push("/cart");
             }}
           >
             order
@@ -126,4 +132,11 @@ const Info = (props) => {
   return <p> 재고 : {props.재고[0]} </p>;
 };
 
-export default Detail;
+function state를props화(state) {
+  return {
+    state: state.reducer,
+    aler열렸니: state.reducer2,
+  };
+}
+
+export default connect(state를props화)(Detail);

@@ -5,15 +5,45 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
+import { createStore, combineReducers } from "redux";
 
-let store = createStore(() => {
-  return [
-    { id: 0, name: "단감", quan: 2 ,price: 35.99},
-    { id: 1, name: "조개탕", quan: 1 ,price: 25.15},
-    { id: 2, name: "청태김", quan: 3 ,price: 10.00}
-  ];
-});
+let alert초기값 = true;
+
+function reducer2(state = alert초기값, 액션) {
+  if (액션.type === "알림닫기") {
+    return (state = false);
+  }
+  return state;
+}
+
+let 기본state = [
+  { id: 0, name: "단감", quan: 2, price: 35.99 },
+  { id: 1, name: "조개탕", quan: 1, price: 25.15 },
+  { id: 2, name: "청태김", quan: 3, price: 10.0 },
+];
+
+function reducer(state = 기본state, 액션) {
+  if (액션.type === "상품추가") {
+    let copy = [...state];
+    copy.push(액션.payload);
+    return copy;
+  }
+
+  if (액션.type === "수량증가") {
+    let copy = [...state];
+    copy[0].quan++;
+    return copy;
+  } else if (액션.type === "수량감소") {
+    let copy = [...state];
+    copy[0].quan--;
+    return copy;
+  }
+
+  return state;
+}
+
+let store = createStore(combineReducers({ reducer, reducer2 }));
+
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
