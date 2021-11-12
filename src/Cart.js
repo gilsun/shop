@@ -1,7 +1,12 @@
 import Table from "react-bootstrap/Table";
-import { connect } from "react-redux";
+// import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import "./Cart.scss";
 const Cart = (props) => {
+
+const state = useSelector(state => state);
+const dispatch = useDispatch(state);
+
   return (
     <div>
       <Table responsive="sm">
@@ -16,7 +21,7 @@ const Cart = (props) => {
           </tr>
         </thead>
         <tbody>
-          {props.state.map((item, index) => {
+          {state.reducer.map((item, index) => {
             return (
               <tr key={index}>
                 <td>{item.id}</td>
@@ -27,7 +32,7 @@ const Cart = (props) => {
                   <button
                     className="btn btn-danger"
                     onClick={() => {
-                      props.dispatch({ type: "수량감소" });
+                      dispatch({ type: "수량감소" });
                     }}
                   >
                     -
@@ -35,7 +40,7 @@ const Cart = (props) => {
                   <button
                     className="btn btn-danger"
                     onClick={() => {
-                      props.dispatch({ type: "수량증가" });
+                      dispatch({ type: "수량증가" });
                     }}
                   >
                     +
@@ -47,11 +52,11 @@ const Cart = (props) => {
         </tbody>
       </Table>
 
-      {props.aler열렸니 === true ? (
+      {state.reducer2 === true ? (
         <div className="my-alert2">
           <p>지금 구매하시면 신규할인 20%</p>
           <button onClick={()=>{
-            props.dispatch({type:"알림닫기"})
+            dispatch({type:"알림닫기"})
           }}>닫기</button>
         </div>
       ) : null}
@@ -59,11 +64,13 @@ const Cart = (props) => {
   );
 };
 
-function state를props화(state) {
-  return {
-    state: state.reducer,
-    aler열렸니: state.reducer2,
-  };
-}
+// function state를props화(state) {
+//   return {
+//     state: state.reducer,
+//     aler열렸니: state.reducer2,
+//   };
+// }
 
-export default connect(state를props화)(Cart);
+// export default connect(state를props화)(Cart);
+
+export default Cart
